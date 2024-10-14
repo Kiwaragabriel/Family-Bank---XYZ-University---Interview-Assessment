@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="XYZ_UniversityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblCourses">
+    <Key>
+      <PropertyRef Name="CourseId" />
+    </Key>
+    <Property Name="CourseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FacultyId" Type="int" Nullable="false" />
+    <Property Name="CourseName" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
+    <Property Name="Creator_UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblFaculties">
+    <Key>
+      <PropertyRef Name="FacultyId" />
+    </Key>
+    <Property Name="FacultyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FacultyName" Type="varchar" MaxLength="150" />
+    <Property Name="CreatedOn" Type="smalldatetime" />
+    <Property Name="Creator_UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="tblStudents">
+    <Key>
+      <PropertyRef Name="StudentId" />
+    </Key>
+    <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CourseId" Type="int" Nullable="false" />
+    <Property Name="RegistrationNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FullName" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="NationalId" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
+    <Property Name="Creator_UserId" Type="int" Nullable="false" />
+    <Property Name="FeeBalance" Type="money" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="tblTuitionFeePayments">
+    <Key>
+      <PropertyRef Name="TuitionFeePaymentId" />
+    </Key>
+    <Property Name="TuitionFeePaymentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudentId" Type="int" Nullable="false" />
+    <Property Name="TransactionNo" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="PaymentDate" Type="smalldatetime" Nullable="false" />
+    <Property Name="PaymentAmount" Type="money" Nullable="false" />
+    <Property Name="PaymentMethod" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PaidBy" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Remarks" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblTuitionFees">
+    <Key>
+      <PropertyRef Name="TuitionFeeId" />
+    </Key>
+    <Property Name="TuitionFeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Amount" Type="money" Nullable="false" />
+    <Property Name="DueDate" Type="smalldatetime" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
+    <Property Name="Creator_UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblUsers">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserEmail" Type="varchar" MaxLength="250" />
+    <Property Name="CreatedOn" Type="smalldatetime" />
+  </EntityType>
+  <Association Name="FK_tblCourses_tblFaculties">
+    <End Role="tblFaculties" Type="Self.tblFaculties" Multiplicity="1" />
+    <End Role="tblCourses" Type="Self.tblCourses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblFaculties">
+        <PropertyRef Name="FacultyId" />
+      </Principal>
+      <Dependent Role="tblCourses">
+        <PropertyRef Name="FacultyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCourses_tblUsers">
+    <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="1" />
+    <End Role="tblCourses" Type="Self.tblCourses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsers">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="tblCourses">
+        <PropertyRef Name="Creator_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblFaculties_tblUsers">
+    <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="0..1" />
+    <End Role="tblFaculties" Type="Self.tblFaculties" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsers">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="tblFaculties">
+        <PropertyRef Name="Creator_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblStudents_tblCourses">
+    <End Role="tblCourses" Type="Self.tblCourses" Multiplicity="1" />
+    <End Role="tblStudents" Type="Self.tblStudents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCourses">
+        <PropertyRef Name="CourseId" />
+      </Principal>
+      <Dependent Role="tblStudents">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblStudents_tblUsers">
+    <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="1" />
+    <End Role="tblStudents" Type="Self.tblStudents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsers">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="tblStudents">
+        <PropertyRef Name="Creator_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblTuitionFeePayments_tblStudents">
+    <End Role="tblStudents" Type="Self.tblStudents" Multiplicity="1" />
+    <End Role="tblTuitionFeePayments" Type="Self.tblTuitionFeePayments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblStudents">
+        <PropertyRef Name="StudentId" />
+      </Principal>
+      <Dependent Role="tblTuitionFeePayments">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblTuitionFees_tblUsers">
+    <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="1" />
+    <End Role="tblTuitionFees" Type="Self.tblTuitionFees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsers">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="tblTuitionFees">
+        <PropertyRef Name="Creator_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_getStudentTuitionFeeBalance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="money">
+    <Parameter Name="StudentId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="proc_addTuitionFeePayment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RegistrationNo" Type="varchar" Mode="In" />
+    <Parameter Name="TransactionNo" Type="varchar" Mode="In" />
+    <Parameter Name="PaymentDate" Type="smalldatetime" Mode="In" />
+    <Parameter Name="PaymentAmount" Type="money" Mode="In" />
+    <Parameter Name="PaymentMethod" Type="varchar" Mode="In" />
+    <Parameter Name="PaidBy" Type="varchar" Mode="In" />
+    <Parameter Name="Remarks" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="proc_verifyAccessDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="APIUsername" Type="varchar" Mode="In" />
+    <Parameter Name="APIKey" Type="varchar" Mode="In" />
+    <Parameter Name="AccessToken" Type="varchar(max)" Mode="In" />
+  </Function>
+  <EntityContainer Name="XYZ_UniversityModelStoreContainer">
+    <EntitySet Name="tblCourses" EntityType="Self.tblCourses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblFaculties" EntityType="Self.tblFaculties" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblStudents" EntityType="Self.tblStudents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblTuitionFeePayments" EntityType="Self.tblTuitionFeePayments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblTuitionFees" EntityType="Self.tblTuitionFees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblCourses_tblFaculties" Association="Self.FK_tblCourses_tblFaculties">
+      <End Role="tblFaculties" EntitySet="tblFaculties" />
+      <End Role="tblCourses" EntitySet="tblCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCourses_tblUsers" Association="Self.FK_tblCourses_tblUsers">
+      <End Role="tblUsers" EntitySet="tblUsers" />
+      <End Role="tblCourses" EntitySet="tblCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblFaculties_tblUsers" Association="Self.FK_tblFaculties_tblUsers">
+      <End Role="tblUsers" EntitySet="tblUsers" />
+      <End Role="tblFaculties" EntitySet="tblFaculties" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblStudents_tblCourses" Association="Self.FK_tblStudents_tblCourses">
+      <End Role="tblCourses" EntitySet="tblCourses" />
+      <End Role="tblStudents" EntitySet="tblStudents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblStudents_tblUsers" Association="Self.FK_tblStudents_tblUsers">
+      <End Role="tblUsers" EntitySet="tblUsers" />
+      <End Role="tblStudents" EntitySet="tblStudents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblTuitionFeePayments_tblStudents" Association="Self.FK_tblTuitionFeePayments_tblStudents">
+      <End Role="tblStudents" EntitySet="tblStudents" />
+      <End Role="tblTuitionFeePayments" EntitySet="tblTuitionFeePayments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblTuitionFees_tblUsers" Association="Self.FK_tblTuitionFees_tblUsers">
+      <End Role="tblUsers" EntitySet="tblUsers" />
+      <End Role="tblTuitionFees" EntitySet="tblTuitionFees" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="XYZ_UniversityModelStoreContainer" CdmEntityContainer="XYZ_UniversityEntities">
+    <EntitySetMapping Name="tblCourses">
+      <EntityTypeMapping TypeName="XYZ_UniversityModel.tblCours">
+        <MappingFragment StoreEntitySet="tblCourses">
+          <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+          <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+          <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Creator_UserId" ColumnName="Creator_UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblFaculties">
+      <EntityTypeMapping TypeName="XYZ_UniversityModel.tblFaculty">
+        <MappingFragment StoreEntitySet="tblFaculties">
+          <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+          <ScalarProperty Name="FacultyName" ColumnName="FacultyName" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Creator_UserId" ColumnName="Creator_UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblStudents">
+      <EntityTypeMapping TypeName="XYZ_UniversityModel.tblStudent">
+        <MappingFragment StoreEntitySet="tblStudents">
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="NationalId" ColumnName="NationalId" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Creator_UserId" ColumnName="Creator_UserId" />
+          <ScalarProperty Name="FeeBalance" ColumnName="FeeBalance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTuitionFeePayments">
+      <EntityTypeMapping TypeName="XYZ_UniversityModel.tblTuitionFeePayment">
+        <MappingFragment StoreEntitySet="tblTuitionFeePayments">
+          <ScalarProperty Name="TuitionFeePaymentId" ColumnName="TuitionFeePaymentId" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="TransactionNo" ColumnName="TransactionNo" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+          <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+          <ScalarProperty Name="PaidBy" ColumnName="PaidBy" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTuitionFees">
+      <EntityTypeMapping TypeName="XYZ_UniversityModel.tblTuitionFee">
+        <MappingFragment StoreEntitySet="tblTuitionFees">
+          <ScalarProperty Name="TuitionFeeId" ColumnName="TuitionFeeId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Creator_UserId" ColumnName="Creator_UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUsers">
+      <EntityTypeMapping TypeName="XYZ_UniversityModel.tblUser">
+        <MappingFragment StoreEntitySet="tblUsers">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="proc_addTuitionFeePayment" FunctionName="XYZ_UniversityModel.Store.proc_addTuitionFeePayment">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="XYZ_UniversityModel.proc_addTuitionFeePayment_Result">
+          <ScalarProperty Name="TuitionFeePaymentId" ColumnName="TuitionFeePaymentId" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="TransactionNo" ColumnName="TransactionNo" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+          <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+          <ScalarProperty Name="PaidBy" ColumnName="PaidBy" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="proc_verifyAccessDetails" FunctionName="XYZ_UniversityModel.Store.proc_verifyAccessDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="XYZ_UniversityModel.proc_verifyAccessDetails_Result">
+          <ScalarProperty Name="APIUserId" ColumnName="APIUserId" />
+          <ScalarProperty Name="APIUsername" ColumnName="APIUsername" />
+          <ScalarProperty Name="APIKey" ColumnName="APIKey" />
+          <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Creator_UserId" ColumnName="Creator_UserId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>
