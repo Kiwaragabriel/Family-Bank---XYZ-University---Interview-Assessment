@@ -1,0 +1,30 @@
+USE [XYZ_University]
+GO
+
+/****** Object:  Table [dbo].[tblUsers]    Script Date: 14/10/2024 16:22:25 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblUsers](
+	[UserId] [int] IDENTITY(1,1) NOT NULL,
+	[UserName] [varchar](50) NOT NULL,
+	[UserEmail] [varchar](250) NULL,
+	[CreatedOn] [smalldatetime] NULL,
+ CONSTRAINT [PK_tblUsers] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [IX_tblUsers] UNIQUE NONCLUSTERED 
+(
+	[UserName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[tblUsers] ADD  CONSTRAINT [DF_tblUsers_CreatedOn]  DEFAULT (getdate()) FOR [CreatedOn]
+GO
+
+
