@@ -1,14 +1,17 @@
 This project allows for real time transmission of Tuition Fees Payment notifications from Family Bank to XYZ University system. Payments are pushed by Family Bank and are posted to the XYZ University financial system.
 Setup Instructions
 
-1.	Download the database backup on the project
-2.	Restore on your machine
-3.	Clone the repository
-4.	Open the solution in Visual Studio (2019 or later recommended)
-5.	Restore NuGet packages
-6.	Update the connection string in `Web.config` to connect to the new instance where you’ve restored the backup
-7.	Open Package Manager Console and run `Update-Database` to create the database and apply migrations
-8.	Build and run the project
+
+1.	Go to the Database folder
+2.	Download the database backup i.e. XYZ_University_14102024.rar - (231KB)
+3.	Extract and restore on your machine
+4.	Clone the repository
+5.	Open the solution in Visual Studio (2019 or later recommended)
+6.	Restore NuGet packages
+7.	Update the connection string in `Web.config` to connect to the new instance where you’ve restored the backup
+8.	Open Package Manager Console and run `Update-Database` to create the database and apply migrations
+9.	Build and run the project
+
 
 API Endpoints
 
